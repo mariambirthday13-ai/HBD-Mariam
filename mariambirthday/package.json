@@ -1,0 +1,9 @@
+{
+  "name": "birthday-memories",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A birthday video, message, photo memories, and voice message website.",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
