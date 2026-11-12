@@ -43,23 +43,20 @@
           <p>Get comfy, lovely. This one's just for you.</p>
         </div>
         <div class="video-frame">
-          <video id="intro-video" class="intro-video" autoplay playsinline controls preload="metadata">
-            <source src="/assets/intro-video.mp4" type="video/mp4">
-            Your browser does not support video playback.
-          </video>
+          <iframe
+            id="intro-video"
+            class="intro-video"
+            src="https://drive.google.com/file/d/1fZ75o-Ia0BMD2qi_9tpzrRPNz4EKBGDQ/preview"
+            title="Birthday video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
           <div class="media-placeholder video-placeholder" id="video-placeholder">
             <span class="placeholder-icon" aria-hidden="true">▶</span>
-            <strong>Your little video goes here</strong>
-            <span>Add your video as <code>public/assets/intro-video.mp4</code></span>
+            <strong>Your video could not be loaded</strong>
+            <a href="https://drive.google.com/file/d/1fZ75o-Ia0BMD2qi_9tpzrRPNz4EKBGDQ/view?usp=sharing" target="_blank" rel="noopener noreferrer">Watch it on Drive</a>
           </div>
-        </div>
-        <div class="video-seek-controls" aria-label="Video seek controls">
-          <button class="button button-secondary" id="video-back-10" type="button" aria-label="Go back 10 seconds">
-            <span aria-hidden="true">↶</span> 10 sec
-          </button>
-          <button class="button button-secondary" id="video-forward-10" type="button" aria-label="Go forward 10 seconds">
-            10 sec <span aria-hidden="true">↷</span>
-          </button>
         </div>
         <button class="button button-primary skip-button" id="skip-video" type="button">
           Skip video <span aria-hidden="true">→</span>

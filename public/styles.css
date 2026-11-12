@@ -193,9 +193,10 @@ h1 {
 .intro-video {
   position: relative;
   z-index: 1;
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  border: 0;
   background: #e8edf2;
 }
 
@@ -249,6 +250,11 @@ h1 {
 
 .video-placeholder.is-visible {
   z-index: 2;
+}
+
+.video-placeholder a {
+  color: #48617e;
+  font-size: 0.85rem;
 }
 
 .button {

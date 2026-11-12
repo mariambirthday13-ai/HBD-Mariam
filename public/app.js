@@ -28,6 +28,7 @@ const screens = {
 };
 const introVideo = document.querySelector("#intro-video");
 const videoPlaceholder = document.querySelector("#video-placeholder");
+const introVideoUrl = introVideo.src;
 const music = new Audio("/assets/happy-birthday.mp3");
 music.loop = true;
 music.preload = "none";
@@ -65,6 +66,12 @@ function showNotice(message) {
   noticeTimer = window.setTimeout(() => notice.classList.remove("is-visible"), 4500);
 }
 
+introVideo.addEventListener("load", () => {
+  if (introVideo.getAttribute("src") !== "about:blank") {
+    videoPlaceholder.classList.remove("is-visible");
+  }
+});
+
 function showScreen(name) {
   notice.classList.remove("is-visible");
   window.clearTimeout(noticeTimer);
@@ -74,8 +81,10 @@ function showScreen(name) {
     screen.classList.toggle("is-active", active);
   });
 
-  if (name !== "video") {
-    introVideo.pause();
+  if (name === "video") {
+    if (introVideo.getAttribute("src") !== introVideoUrl) introVideo.src = introVideoUrl;
+  } else if (introVideo.getAttribute("src") !== "about:blank") {
+    introVideo.src = "about:blank";
   }
 
   if (name === "gallery") {
@@ -173,20 +182,7 @@ memoryPhoto.addEventListener("error", () => {
   }
 });
 
-introVideo.addEventListener("loadeddata", () => {
-  videoPlaceholder.classList.remove("is-visible");
-});
-introVideo.addEventListener("error", () => {
-  videoPlaceholder.classList.add("is-visible");
-});
-introVideo.addEventListener("playing", () => {
-  videoPlaceholder.classList.remove("is-visible");
-});
-introVideo.addEventListener("ended", () => showScreen("message"));
-
 document.querySelector("#skip-video").addEventListener("click", () => showScreen("message"));
-document.querySelector("#video-back-10").addEventListener("click", () => seekVideo(-10));
-document.querySelector("#video-forward-10").addEventListener("click", () => seekVideo(10));
 document.querySelector("#open-memories").addEventListener("click", () => {
   currentPhoto = 0;
   renderPhoto();
@@ -202,28 +198,8 @@ document.querySelector("#finish-surprise").addEventListener("click", () => {
 });
 document.querySelector("#replay-surprise").addEventListener("click", () => {
   showScreen("video");
-  introVideo.currentTime = 0;
-  introVideo.play().catch(() => {
-    showNotice("Press play on the video when you're ready to watch it again.");
-  });
 });
 document.querySelector("#revisit-memories").addEventListener("click", () => showScreen("gallery"));
-
-function seekVideo(seconds) {
-  const seek = () => {
-    const nextTime = Math.max(0, introVideo.currentTime + seconds);
-    introVideo.currentTime = Number.isFinite(introVideo.duration)
-      ? Math.min(nextTime, introVideo.duration)
-      : nextTime;
-  };
-
-  if (introVideo.readyState < HTMLMediaElement.HAVE_METADATA) {
-    introVideo.addEventListener("loadedmetadata", seek, { once: true });
-    return;
-  }
-
-  seek();
-}
 
 memoryCard.addEventListener("pointerdown", (event) => {
   if (event.pointerType === "mouse") return;
