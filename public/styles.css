@@ -183,13 +183,6 @@ h1 {
   box-shadow: 0 20px 55px rgba(24, 51, 84, 0.1);
 }
 
-.video-seek-controls {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin: 0 0 18px;
-}
-
 .intro-video {
   position: relative;
   z-index: 1;
