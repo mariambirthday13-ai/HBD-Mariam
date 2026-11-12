@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: birthday-memories
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
